@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { withRouter } from 'react-router-dom';
 
-@withRouter
+// @withRouter
 
 class App extends React.Component {
   state = {

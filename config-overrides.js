@@ -21,9 +21,9 @@ const { PassThrough } = require('stream');
 module.exports = override(
     addDecoratorsLegacy(),// 支持装饰器
     addWebpackAlias({
-        '@': psth.resolve(__dirname, 'src'),
+        '@': path.resolve(__dirname, 'src'),
         '#': path.resolve(__dirname, 'src/components'),
-        '~': psth.resolve(__dirname, 'src/views')
+        '~': path.resolve(__dirname, 'src/views')
     }), //添加路径别名
     fixBabelImports('import', {
         "libraryName": "antd",
