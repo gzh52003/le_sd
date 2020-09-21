@@ -1,26 +1,30 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { withRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+@withRouter
+
+class App extends React.Component {
+  state = {
+    num: 10
+  }
+  changeNumber = () => {
+    this.setState({
+      num: this.state.num + 1
+    })
+  }
+  render() {
+    console.log('App.props', this.props);
+    return (
+      <div className='App'>
+        叼你嗨啊 <br />
+        SEVEN HEAD<br />
+        {this.state.num}<br />
+        <button onClick={this.changeNumber}>叼多一次</button>
+      </div>
+    );
+  }
 }
 
 export default App;
