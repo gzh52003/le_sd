@@ -1,4 +1,40 @@
-.P-home>h1{
-    font-size: 60px;
-    color:red;
+.ant-input-group-wrapper{
+    width: 80%;
+    
+}
+
+.sou{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:5px;
+    background:#1890ff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 3rem;
+}
+.ant-input-group-addon>.ant-btn{
+    border:none;
+    border-radius:0;
+}
+.ant-btn{
+    width: 3rem;
+}
+.ant-tabs{
+    margin-top: 6rem;
+    width: 100%;
+    padding:0 1rem;
+}
+.ant-tabs-nav{
+    background:#fff;
+    width: 100%;
+    position: fixed !important;
+    top: 3rem;
+}
+.ant-drawer{
+    z-index: 9999;
+}
+.demo-loadmore-list {
+  min-height: 350px;
 }
