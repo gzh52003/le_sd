@@ -119,12 +119,13 @@ class Home extends Component {
                                     <Skeleton avatar title={false} loading={item.loading} active>
                                         <List.Item.Meta
                                             avatar={
-                                                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                                //头像
+                                                <Avatar src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
                                             }
                                             title={<a href="https://ant.design">{item.name.last}</a>}
-                                            description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                            description="浦泥阿木"
                                         />
-                                        <div>content</div>
+                                        <div>下载</div>
                                     </Skeleton>
                                 </List.Item>
                             )}
