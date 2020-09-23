@@ -1,7 +1,11 @@
 {
-  "name": "myapp",
-  "version": "0.1.0",
-  "private": true,
+  "name": "router",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
   "dependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
@@ -70,9 +74,6 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -137,5 +138,17 @@
     "presets": [
       "react-app"
     ]
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gzh52003/sou.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gzh52003/sou/issues"
+  },
+  "homepage": "https://github.com/gzh52003/sou#readme"
 }
