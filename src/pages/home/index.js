@@ -2,47 +2,37 @@ import React, { Component } from 'react'
 import "antd/dist/antd.css";
 import './home.css'
 import { HashRouter } from 'react-router-dom'
-import { Tabs, Input, Drawer, Button, List, Avatar, Skeleton } from 'antd';
+import { Tabs, Input, Drawer, Button, List, Avatar, Spin } from 'antd';
 import {
-    AudioOutlined,
     UnorderedListOutlined
 } from '@ant-design/icons';
+
 import reqwest from 'reqwest';
-const count = 3;
-const fakeDataUrl = `https://randomuser.me/api/?results=${count}&inc=name,gender,email,nat&noinfo`;
+import InfiniteScroll from 'react-infinite-scroller';
+const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
+
 
 const { TabPane } = Tabs;
 const { Search } = Input;
-const suffix = (
-    <AudioOutlined
-        style={{
-            fontSize: 16,
-            color: '#1890ff',
-        }}
-    />
-);
 
 class Home extends Component {
 
     state = {
-        initLoading: true,
-        loading: false,
         data: [],
-        list: [],
+        loading: false,
+        hasMore: true,
+
         visible: false
     };
 
     componentDidMount() {
-        this.getData(res => {
+        this.fetchData(res => {
             this.setState({
-                initLoading: false,
                 data: res.results,
-                list: res.results,
             });
         });
     }
-
-    getData = callback => {
+    fetchData = callback => {
         reqwest({
             url: fakeDataUrl,
             type: 'json',
@@ -51,26 +41,6 @@ class Home extends Component {
             success: res => {
                 callback(res);
             },
-        });
-    };
-
-    onLoadMore = () => {
-        this.setState({
-            loading: true,
-            list: this.state.data.concat([...new Array(count)].map(() => ({ loading: true, name: {} }))),
-        });
-        this.getData(res => {
-            const data = this.state.data.concat(res.results);
-            this.setState(
-                {
-                    data,
-                    list: data,
-                    loading: false,
-                },
-                () => {
-                    window.dispatchEvent(new Event('resize'));
-                },
-            );
         });
     };
 
@@ -87,49 +57,33 @@ class Home extends Component {
     };
     render() {
 
-        const { initLoading, loading, list } = this.state;
-        const loadMore =
-            !initLoading && !loading ? (
-                <div
-                    style={{
-                        textAlign: 'center',
-                        marginTop: 12,
-                        height: 32,
-                        lineHeight: '32px',
-                    }}
-                >
-                    <Button onClick={this.onLoadMore}>加载更多</Button>
-                </div>
-            ) : null;
-
+        const { data } = this.state;
+        console.log({ data });
+        console.log(this.state);
         return (
             <HashRouter>
-                <Tabs defaultActiveKey="1" centered className="nav">
+                <Tabs type="card" centered className="nav">
                     <TabPane tab="Tab 1" key="1" >
-                        <List
-                            className="demo-loadmore-list"
-                            loading={initLoading}
-                            itemLayout="horizontal"
-                            loadMore={loadMore}
-                            dataSource={list}
-                            renderItem={item => (
-                                <List.Item
-                                    actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
-                                >
-                                    <Skeleton avatar title={false} loading={item.loading} active>
+                        <div className="demo-infinite-container">
+
+                            <List
+                                dataSource={this.state.data}
+                                renderItem={item => (
+                                    <List.Item key={item.id}>
                                         <List.Item.Meta
                                             avatar={
-                                                //头像
-                                                <Avatar src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
+                                                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                                             }
                                             title={<a href="https://ant.design">{item.name.last}</a>}
-                                            description="浦泥阿木"
+                                            description={item.email}
                                         />
-                                        <div>下载</div>
-                                    </Skeleton>
-                                </List.Item>
-                            )}
-                        />
+                                        <div>Content</div>
+                                    </List.Item>
+                                )}
+                            >
+                            </List>
+
+                        </div>
                     </TabPane>
                     <TabPane tab="Tab 2" key="2">
                         Content of Tab Pane 2
