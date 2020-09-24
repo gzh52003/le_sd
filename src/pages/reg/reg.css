@@ -1,8 +1,8 @@
 .login-form {
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 350px;
+    margin: 20px auto;
   }
-.login-form-forgot {
+.login-to {
     float: right;
   }
 .ant-col-rtl .login-form-forgot {
@@ -11,3 +11,6 @@
 .login-form-button {
     width: 100%;
   }
+.title{
+    color: red;
+}
