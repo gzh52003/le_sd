@@ -1,34 +1,34 @@
 import React, { Component } from 'react'
 import "antd/dist/antd.css";
 import './home.css'
-import { HashRouter } from 'react-router-dom'
-import { Tabs, Input, Drawer, Button, List, Avatar, Spin } from 'antd';
+import { HashRouter, Link } from 'react-router-dom'
+import { Tabs, Input, Drawer, Button, List, Avatar, Carousel, } from 'antd';
 import {
     UnorderedListOutlined
 } from '@ant-design/icons';
 
+
 import reqwest from 'reqwest';
-import InfiniteScroll from 'react-infinite-scroller';
-const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
+const fakeDataUrl = 'http://8.129.28.118:2020/api/applist';
 
 
 const { TabPane } = Tabs;
 const { Search } = Input;
 
+
 class Home extends Component {
 
     state = {
         data: [],
-        loading: false,
-        hasMore: true,
-
         visible: false
     };
+
+
 
     componentDidMount() {
         this.fetchData(res => {
             this.setState({
-                data: res.results,
+                data: res.data,
             });
         });
     }
@@ -57,82 +57,100 @@ class Home extends Component {
     };
     render() {
 
-        const { data } = this.state;
-        console.log({ data });
+        const data = this.state;
+        console.log(data.data.data);
         console.log(this.state);
+        // console.log(data.data.data);
         return (
             <HashRouter>
                 <Tabs type="card" centered className="nav">
-                    <TabPane tab="Tab 1" key="1" >
-                        <div className="demo-infinite-container">
+                    <TabPane tab="精选" key="1" >
+                        <Carousel autoplay>
+                            <div>
+                                <img className="lunbo" src="http://img.lenovomm.com//s3/img/app/app-img-lestore/6920-2018-03-13101843-1520907523267.jpg" />
+                            </div>
+                            <div>
+                                <img className="lunbo" src="http://img.lenovomm.com//s3/img/app/app-img-lestore/7869-2018-03-13101934-1520907574920.jpg" />
+                            </div>
+                        </Carousel>
 
+                        <div className="linknav">
+                            <div onClick={this.goto.bind(this)} >
+                                <img src="http://img.lenovomm.com//s3/img/app/app-img-lestore/9412-2018-02-22083419-1519302859703.png" />
+                                <p style={{ fontSize: '12px', textAlign: 'center', color: "rgba(0, 0, 0, 0.45)" }}>装机必备</p>
+                            </div>
+                            <div>
+
+                                <img src="http://img.lenovomm.com//s3/img/app/app-img-lestore/2138-2018-02-22083545-1519302945175.png" />
+                                <p style={{ fontSize: '12px', textAlign: 'center', color: "rgba(0, 0, 0, 0.45)" }}>游戏论坛</p>
+
+                            </div>
+                            <div>
+
+                                <img src="http://img.lenovomm.com//s3/img/app/app-img-lestore/9729-2018-02-26053839-1519637919033.png" />
+                                <p style={{ fontSize: '12px', textAlign: 'center', color: "rgba(0, 0, 0, 0.45)" }}>新品上架</p>
+
+                            </div>
+                            <div>
+
+                                <img src="http://img.lenovomm.com//s3/img/app/app-img-lestore/8779-2018-02-22083733-1519303053587.png" />
+                                <p style={{ fontSize: '12px', textAlign: 'center', color: "rgba(0, 0, 0, 0.45)" }}>小编推荐</p>
+
+                            </div>
+                        </div>
+
+
+                        <div className="demo-infinite-container">
                             <List
-                                dataSource={this.state.data}
+                                dataSource={this.state.data.data}
                                 renderItem={item => (
                                     <List.Item key={item.id}>
                                         <List.Item.Meta
                                             avatar={
-                                                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                                <Avatar src={item.iconAddr} />
                                             }
-                                            title={<a href="https://ant.design">{item.name.last}</a>}
-                                            description={item.email}
+                                            title={item.name}
+                                            description={item.downloadCount}
+
                                         />
-                                        <div>Content</div>
+                                        <div><Button type="primary" className="anzhuang" >安装</Button></div>
                                     </List.Item>
                                 )}
                             >
                             </List>
-
                         </div>
                     </TabPane>
-                    <TabPane tab="Tab 2" key="2">
+                    <TabPane tab="游戏" key="2">
                         Content of Tab Pane 2
                     </TabPane>
-                    <TabPane tab="Tab 3" key="3">
+                    <TabPane tab="软件" key="3">
                         Content of Tab Pane 3
                     </TabPane>
-                    <TabPane tab="Tab 4" key="4">
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
-                        <img src="https://img.zcool.cn/community/0146495f69c5d311013f31104aff2b.jpg@260w_195h_1c_1e_1o_100sh.jpg" />
+                    <TabPane tab="分类" key="4">
+
                     </TabPane>
                 </Tabs>
 
                 <div className="sou">
                     <Search placeholder="搜索应用" onSearch={value => console.log(value)} enterButton />
                     <div className="site-drawer-render-in-current-wrapper">
-
                         <Button type="primary" onClick={this.showDrawer}><UnorderedListOutlined /></Button>
-
-                        <Drawer
-                            title="我的"
-                            placement="right"
-                            closable={false}
-                            onClose={this.onClose}
-                            visible={this.state.visible}
-                            getContainer={false}
-
-                        >
-                            <p>
-                                <Button type="link" onClick={this.gotoLogin.bind(this)} block>登录/注册</Button>
-                            </p>
-                            <p>
-                                <Button type="link" block>Link</Button>
-                            </p>
-                        </Drawer>
                     </div >
                 </div >
-
-
+                <Drawer
+                    title="我的"
+                    placement="right"
+                    closable={false}
+                    onClose={this.onClose}
+                    visible={this.state.visible}
+                    getContainer={false}>
+                    <p>
+                        <Button type="link" onClick={this.gotoLogin.bind(this)} block>登录/注册</Button>
+                    </p>
+                    <p>
+                        <Button type="link" block>Link</Button>
+                    </p>
+                </Drawer>
 
 
             </HashRouter >
@@ -143,6 +161,9 @@ class Home extends Component {
     // 功能编写
     gotoLogin() {
         this.props.history.push('/login')
+    }
+    goto() {
+        this.props.history.push('/reg')
     }
 
 }

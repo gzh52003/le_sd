@@ -58,11 +58,8 @@
     "react-app-rewired": "^2.0.2-next.0",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
-<<<<<<< HEAD
     "react-infinite-scroller": "^1.2.4",
-=======
     "react-redux": "^7.2.1",
->>>>>>> e6157d732ccefa3c98bdb044341f916cbf4b5366
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
