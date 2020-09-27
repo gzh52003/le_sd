@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import "antd/dist/antd.css";
 import './home.css'
-import { HashRouter, Link } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import { Tabs, Input, Drawer, Button, List, Avatar, Carousel, } from 'antd';
 import {
     UnorderedListOutlined
@@ -12,6 +12,7 @@ import reqwest from 'reqwest';
 const fakeDataUrl = 'http://8.129.28.118:2020/api/applist';
 
 
+
 const { TabPane } = Tabs;
 const { Search } = Input;
 
@@ -20,6 +21,8 @@ class Home extends Component {
 
     state = {
         data: [],
+        loading: false,
+        hasMore: true,
         visible: false
     };
 
@@ -44,6 +47,8 @@ class Home extends Component {
         });
     };
 
+
+
     showDrawer = () => {
         this.setState({
             visible: true,
@@ -58,8 +63,9 @@ class Home extends Component {
     render() {
 
         const data = this.state;
-        console.log(data.data.data);
         console.log(this.state);
+
+
         // console.log(data.data.data);
         return (
             <HashRouter>
@@ -101,6 +107,7 @@ class Home extends Component {
 
 
                         <div className="demo-infinite-container">
+
                             <List
                                 dataSource={this.state.data.data}
                                 renderItem={item => (
@@ -111,9 +118,11 @@ class Home extends Component {
                                             }
                                             title={item.name}
                                             description={item.downloadCount}
-
+                                            onClick={this.routerTo.bind(this, item._id)}
                                         />
-                                        <div><Button type="primary" className="anzhuang" >安装</Button></div>
+                                        <div>
+                                            <Button type="primary" className="anzhuang" >安装</Button>
+                                        </div>
                                     </List.Item>
                                 )}
                             >
@@ -164,6 +173,10 @@ class Home extends Component {
     }
     goto() {
         this.props.history.push('/reg')
+    }
+    routerTo = (v) => {
+        this.props.history.push('/Detail/' + v)
+        console.log(v);
     }
 
 }
